@@ -14,6 +14,10 @@
 		DA66EAA11C9B21FE00FFDDBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA66EA9F1C9B21FE00FFDDBC /* Main.storyboard */; };
 		DA66EAA31C9B21FE00FFDDBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA66EAA21C9B21FE00FFDDBC /* Assets.xcassets */; };
 		DA66EAA61C9B21FE00FFDDBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA66EAA41C9B21FE00FFDDBC /* LaunchScreen.storyboard */; };
+		DA73272A1C9CA485007AA864 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7327291C9CA485007AA864 /* Lato-Light.ttf */; };
+		DA73272F1C9CBA63007AA864 /* Museo_Slab_500.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA73272D1C9CBA63007AA864 /* Museo_Slab_500.otf */; };
+		DA7327301C9CBA63007AA864 /* Museo_Slab_700.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA73272E1C9CBA63007AA864 /* Museo_Slab_700.otf */; };
+		DAD300601C9C83BD00B01064 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAD3005F1C9C83BD00B01064 /* Lato-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		DA66EAA21C9B21FE00FFDDBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA66EAA51C9B21FE00FFDDBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA66EAA71C9B21FE00FFDDBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7327291C9CA485007AA864 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "fonts/Lato-Light.ttf"; sourceTree = SOURCE_ROOT; };
+		DA73272D1C9CBA63007AA864 /* Museo_Slab_500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Museo_Slab_500.otf; path = fonts/Museo_Slab_500.otf; sourceTree = SOURCE_ROOT; };
+		DA73272E1C9CBA63007AA864 /* Museo_Slab_700.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Museo_Slab_700.otf; path = fonts/Museo_Slab_700.otf; sourceTree = SOURCE_ROOT; };
+		DAD3005F1C9C83BD00B01064 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "fonts/Lato-Semibold.ttf"; sourceTree = SOURCE_ROOT; };
 		DCD98F8072129F2425014A6F /* Pods-one.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-one.debug.xcconfig"; path = "Pods/Target Support Files/Pods-one/Pods-one.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +97,10 @@
 		DA66EA9A1C9B21FE00FFDDBC /* one */ = {
 			isa = PBXGroup;
 			children = (
+				DA7327291C9CA485007AA864 /* Lato-Light.ttf */,
+				DA73272D1C9CBA63007AA864 /* Museo_Slab_500.otf */,
+				DA73272E1C9CBA63007AA864 /* Museo_Slab_700.otf */,
+				DAD3005F1C9C83BD00B01064 /* Lato-Semibold.ttf */,
 				DA3542AD1C9B2EED00F9DE14 /* ViewControllers */,
 				DA66EA9B1C9B21FE00FFDDBC /* AppDelegate.swift */,
 				DA66EA9F1C9B21FE00FFDDBC /* Main.storyboard */,
@@ -160,9 +172,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7327301C9CBA63007AA864 /* Museo_Slab_700.otf in Resources */,
 				DA66EAA61C9B21FE00FFDDBC /* LaunchScreen.storyboard in Resources */,
 				DA66EAA31C9B21FE00FFDDBC /* Assets.xcassets in Resources */,
 				DA66EAA11C9B21FE00FFDDBC /* Main.storyboard in Resources */,
+				DA73272F1C9CBA63007AA864 /* Museo_Slab_500.otf in Resources */,
+				DAD300601C9C83BD00B01064 /* Lato-Semibold.ttf in Resources */,
+				DA73272A1C9CA485007AA864 /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
