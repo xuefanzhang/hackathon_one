@@ -16,9 +16,25 @@ public class MenuItemView: UIView {
         label.textAlignment = .Center
         label.userInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.backgroundColor = UIColor.purpleColor()
+        
+        /*
+        label.backgroundColor = UIColor.greenColor()
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 40
+        label.layer.borderColor = UIColor.greenColor().CGColor
+        label.layer.borderWidth = 1
+        */
+        
         return label
     }()
+    
+    public let backgroundCircleView: UIView = {
+        let roundRectView = UIView()
+        roundRectView.backgroundColor = UIColor.blueColor()
+        
+        return roundRectView
+    }()
+    
     private var options: PagingMenuOptions!
     private var widthLabelConstraint: NSLayoutConstraint!
     
@@ -40,6 +56,19 @@ public class MenuItemView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    override public func drawRect(rect: CGRect) {
+        let radius = CGRectGetHeight(self.layer.bounds) - 20
+        let backgroundCircle = CAShapeLayer()
+        backgroundCircle.frame = CGRectInset(self.layer.frame, 10, 10)
+        backgroundCircle.cornerRadius = radius / 2
+        backgroundCircle.backgroundColor = UIColor.blueColor().CGColor
+        self.layer.addSublayer(backgroundCircle)
+        
+//        self.layer.frame = CGRectInset(self.frame, 10, 10)
+//        self.layer.cornerRadius = (rect.size.height - 20) / 2
+//        self.layer.backgroundColor = UIColor.blueColor().CGColor
     }
     
     // MARK: - Cleanup
