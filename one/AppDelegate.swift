@@ -27,20 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
         let globeIcon = UIImage(named: "tabbar-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let globeItem: UITabBarItem = UITabBarItem.init(title: "", image: globeIcon, tag: 1)
+        let globeItem: UITabBarItem = UITabBarItem.init(title: "", image: globeIcon, tag: 0)
         globeItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
+        
+        let getCareIcon = UIImage(named: "tabbar-GetCare")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let getCareItem = UITabBarItem.init(title: "", image: getCareIcon, tag: 1)
+        getCareItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
+        
+        let chartIcon = UIImage(named: "tabbar-user")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let chartItem = UITabBarItem.init(title: "", image: chartIcon, tag: 2)
+        chartItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
+        
+        let navigationController = UINavigationController(rootViewController: ViewController())
         navigationController.tabBarItem = globeItem
-        let viewControllers = [navigationController]
+        let getCareController = UIViewController()
+        getCareController.tabBarItem = getCareItem
+        let userController = UIViewController()
+        userController.tabBarItem = chartItem
+        
+        let viewControllers = [navigationController, getCareController, userController]
+        
         let tabBarController = UITabBarController()
         tabBarController.tabBar.shadowImage = UIImage()
-        
-        
-//        let getCareItem: UITabBarItem = UITabBarItem.init(title: "getCareButton", image: UIImage(named: "tabbar-GetCare"), tag: 0)
-//        let chartItem: UITabBarItem = UITabBarItem.init(title: "chartButton", image: UIImage(named: "tabbar-user"), tag: 2)
-        
         tabBarController.viewControllers = viewControllers
         tabBarController.tabBar.backgroundImage = UIImage(named: "img-tabbar")
         window?.rootViewController = tabBarController
