@@ -41,9 +41,9 @@ public class MenuItemView: UIView {
         self.options = options
         
         setupView()
-        setupBackgroundCircleView()
+        setupBackgroundCircleView(nil)
         layoutBackgroundCircleView()
-        setupLabel(title: title)
+        setupLabel(title: title, color: nil)
         layoutLabel()
     }
     
@@ -80,7 +80,6 @@ public class MenuItemView: UIView {
         } else {
             backgroundColor = selected ? options.selectedBackgroundColor : options.backgroundColor
         }
-        titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
         titleLabel.font = selected ? options.selectedFont : options.font
 
         // adjust label width if needed
@@ -99,16 +98,22 @@ public class MenuItemView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func setupLabel(title title: String) {
-        titleLabel.text = title
-        titleLabel.textColor = options.textColor
+    internal func setupLabel(title title: String?, color: UIColor?) {
+        if (title != nil) {
+            titleLabel.text = title
+        }
+        if (color != nil) {
+            titleLabel.textColor = color
+        }
         titleLabel.font = options.font
         addSubview(titleLabel)
     }
 
-    private func setupBackgroundCircleView() {
+    internal func setupBackgroundCircleView(color: UIColor?) {
         // TODO:(Michael) make a custom color in the options
-        backgroundCircleView.backgroundColor = UIColor.blueColor()
+        if (color != nil) {
+            backgroundCircleView.backgroundColor = color
+        }
         addSubview(backgroundCircleView)
     }
     
