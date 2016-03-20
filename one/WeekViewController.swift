@@ -22,7 +22,18 @@ struct AppointmentObject {
     }
 }
 
-class WeekViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WeekViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+    
+    let topScrollView = UIScrollView()
+    var previousTopOffset = CGFloat()
+    let bottomScrollView = UIScrollView()
+    let bottomImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "wk12")!)
+        imageView.sizeToFit()
+        return imageView
+    }()
+    var previousBottomOffset = CGFloat()
+    
     
     let trimesterLabel = UILabel()
     let weekLabel = UILabel()
@@ -50,49 +61,62 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "img-bgDefault")!)
+        
+        previousTopOffset = 0
+        topScrollView.backgroundColor = UIColor(patternImage: UIImage(named: "img-bgDefault")!)
+        topScrollView.tag = 100
+        topScrollView.delegate = self;
+        topScrollView.frame = CGRectMake(0, 0, view.bounds.width, view.bounds.height)
+        topScrollView.userInteractionEnabled = false
+        
+        previousBottomOffset = view.bounds.size.height
+        bottomScrollView.tag = 101
+        bottomScrollView.delegate = self;
+        bottomScrollView.frame = CGRectMake(0, 0, view.bounds.width, view.bounds.height)
+        bottomScrollView.contentSize = bottomImageView.bounds.size
+        bottomScrollView.addSubview(bottomImageView)
+        bottomScrollView.setContentOffset(CGPointMake(0, previousBottomOffset), animated: false)
         
         trimesterLabel.textColor = UIColor.whiteColor()
         trimesterLabel.font = UIFont(name: "MuseoSlab-500", size: 15)
         trimesterLabel.sizeToFit()
         trimesterLabel.frame = CGRectMake(40, 10, CGRectGetWidth(trimesterLabel.bounds), CGRectGetHeight(trimesterLabel.bounds))
-        view.addSubview(trimesterLabel)
+        topScrollView.addSubview(trimesterLabel)
         
         divider1.text = "|"
         divider1.textColor = UIColor.whiteColor()
         divider1.font = UIFont(name: "MuseoSlab-500", size: 15)
         divider1.sizeToFit()
         divider1.frame = CGRectMake(160, 10, CGRectGetWidth(divider1.bounds), CGRectGetHeight(divider1.bounds))
-        view.addSubview(divider1)
+        topScrollView.addSubview(divider1)
         
         
         weekLabel.textColor = UIColor.whiteColor()
         weekLabel.font = UIFont(name: "MuseoSlab-500", size: 15)
         weekLabel.sizeToFit()
         weekLabel.frame = CGRectMake(180, 10, CGRectGetWidth(weekLabel.bounds), CGRectGetHeight(weekLabel.bounds))
-        view.addSubview(weekLabel)
+        topScrollView.addSubview(weekLabel)
         
         divider2.text = "|"
         divider2.textColor = UIColor.whiteColor()
         divider2.font = UIFont(name: "MuseoSlab-500", size: 15)
         divider2.sizeToFit()
         divider2.frame = CGRectMake(250, 10, CGRectGetWidth(divider2.bounds), CGRectGetHeight(divider2.bounds))
-        view.addSubview(divider2)
+        topScrollView.addSubview(divider2)
         
         dayLabel.textColor = UIColor.whiteColor()
         dayLabel.font = UIFont(name: "MuseoSlab-500", size: 15)
         dayLabel.sizeToFit()
         dayLabel.frame = CGRectMake(270, 10, CGRectGetWidth(dayLabel.bounds), CGRectGetHeight(dayLabel.bounds))
-        view.addSubview(dayLabel)
+        topScrollView.addSubview(dayLabel)
 
         
         thisWeekLabel.text = "THIS WEEK"
         thisWeekLabel.textColor = UIColor(red: 234/255, green: 194/255, blue: 81/255, alpha: 1)
-        divider2.font = UIFont(name: "Lato-Semibold", size: 15) //not bolding wtf
+        thisWeekLabel.font = UIFont(name: "Lato-Semibold", size: 15)
         thisWeekLabel.sizeToFit()
         thisWeekLabel.frame = CGRectMake(15, 50, CGRectGetWidth(thisWeekLabel.bounds), CGRectGetHeight(thisWeekLabel.bounds))
-        view.addSubview(thisWeekLabel)
+        topScrollView.addSubview(thisWeekLabel)
         
         appointmentsTableView.frame = CGRectMake(15, 60, 340, 200);
         appointmentsTableView.delegate = self
@@ -103,26 +127,52 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         appointmentsTableView.separatorStyle = .None
         appointmentsTableView.rowHeight = 60
         appointmentsTableView.allowsSelection = false
+        appointmentsTableView.userInteractionEnabled = false
         
         appointmentsTableView.registerClass(AppointmentTableViewCell.self, forCellReuseIdentifier: AppointmentTableViewCell.cellIdentifier())
         
-        view.addSubview(appointmentsTableView)
+        topScrollView.addSubview(appointmentsTableView)
+        
 
         babySizeImageView.image = UIImage(named: "img-wk12LimeFetus")!
         babySizeImageView.frame = CGRectMake(15, 280, 87, 96)
-        view.addSubview(babySizeImageView)
+        topScrollView.addSubview(babySizeImageView)
         
         babySizeLabel.font = UIFont(name: "MuseoSlab-700", size: 22)
         babySizeLabel.textColor = UIColor.whiteColor()
         babySizeLabel.numberOfLines = 0
         babySizeLabel.lineBreakMode = .ByWordWrapping
         babySizeLabel.frame = CGRectMake(15, 390, view.bounds.width - 30, 80)
-        view.addSubview(babySizeLabel)
+        topScrollView.addSubview(babySizeLabel)
+        
+        topScrollView.contentSize = CGSizeMake(view.bounds.width, CGRectGetMaxY(babySizeLabel.frame))
+        
+        view.addSubview(topScrollView)
+        view.addSubview(bottomScrollView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        print("Bottom scroll view offset: \(bottomScrollView.contentOffset)")
+        print("Image view frame: \(bottomImageView.frame)")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        print("Bottom scroll view offset: \(bottomScrollView.contentOffset)")
+        print("Image view frame: \(bottomImageView.frame)")
+//        if (scrollView.tag == 101) {  //bottom scroll view
+//            let diff = scrollView.contentOffset.y - previousBottomOffset
+//            print("previousTopOffset: \(previousTopOffset)")
+//            topScrollView.setContentOffset(CGPointMake(0, previousTopOffset - diff), animated: true)
+//            previousBottomOffset = scrollView.contentOffset.y
+//            previousTopOffset = topScrollView.contentOffset.y
+//        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -156,8 +206,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.titleLabel.text    = appointment.title
         cell.locationLabel.text = appointment.location
         
-        
-        
         cell.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
         cell.layer.cornerRadius = 5
         cell.layer.borderColor = UIColor.whiteColor().colorWithAlphaComponent(0.3).CGColor
@@ -170,16 +218,5 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print ("You selected cell #\(indexPath.row)!")
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
