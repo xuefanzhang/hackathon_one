@@ -64,7 +64,8 @@ class ViewController: UIViewController {
         options.circleBackgroundColors = circleColors
         options.textColors = textColors
         options.backgroundColor = UIColor(red: 121/255, green: 120/255, blue: 123/255, alpha: 1)
-        options.menuItemMode = .RoundRect(radius: 20, horizontalPadding: 10, verticalPadding: 10, selectedColor: UIColor.clearColor())
+        options.selectedBackgroundColor = UIColor.clearColor()
+        options.menuItemMode = .Underline(height: 2, color: UIColor.whiteColor(), horizontalPadding: 10, verticalPadding: 0)
         options.menuDisplayMode = .Standard(widthMode: .Fixed(width: 320/8), centerItem: true, scrollingMode: PagingMenuOptions.MenuScrollingMode.ScrollEnabledAndBouces)
 
         pagingMenuController = PagingMenuController(viewControllers: viewControllers, options: options)

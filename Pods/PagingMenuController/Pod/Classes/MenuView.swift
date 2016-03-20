@@ -303,9 +303,6 @@ public class MenuView: UIScrollView {
             $0.setupBackgroundCircleView(colors[menuItemViews.indexOf($0)!])
             $0.setupLabel(title: nil, color: textColors[menuItemViews.indexOf($0)!])
         }
-        
-        setNeedsLayout()
-        layoutIfNeeded()
     }
     
     private func focusMenuItem() {
