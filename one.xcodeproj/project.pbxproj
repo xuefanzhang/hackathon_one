@@ -17,6 +17,7 @@
 		DA73272A1C9CA485007AA864 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7327291C9CA485007AA864 /* Lato-Light.ttf */; };
 		DA73272F1C9CBA63007AA864 /* Museo_Slab_500.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA73272D1C9CBA63007AA864 /* Museo_Slab_500.otf */; };
 		DA7327301C9CBA63007AA864 /* Museo_Slab_700.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA73272E1C9CBA63007AA864 /* Museo_Slab_700.otf */; };
+		DA7327321C9E1053007AA864 /* AppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7327311C9E1053007AA864 /* AppointmentTableViewCell.swift */; };
 		DAD300601C9C83BD00B01064 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAD3005F1C9C83BD00B01064 /* Lato-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		DA7327291C9CA485007AA864 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "fonts/Lato-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		DA73272D1C9CBA63007AA864 /* Museo_Slab_500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Museo_Slab_500.otf; path = fonts/Museo_Slab_500.otf; sourceTree = SOURCE_ROOT; };
 		DA73272E1C9CBA63007AA864 /* Museo_Slab_700.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Museo_Slab_700.otf; path = fonts/Museo_Slab_700.otf; sourceTree = SOURCE_ROOT; };
+		DA7327311C9E1053007AA864 /* AppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentTableViewCell.swift; sourceTree = "<group>"; };
 		DAD3005F1C9C83BD00B01064 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Semibold.ttf"; path = "fonts/Lato-Semibold.ttf"; sourceTree = SOURCE_ROOT; };
 		DCD98F8072129F2425014A6F /* Pods-one.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-one.debug.xcconfig"; path = "Pods/Target Support Files/Pods-one/Pods-one.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 			children = (
 				DA66EA9D1C9B21FE00FFDDBC /* ViewController.swift */,
 				DA3542AE1C9B2F3400F9DE14 /* WeekViewController.swift */,
+				DA7327311C9E1053007AA864 /* AppointmentTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				DA3542AF1C9B2F3400F9DE14 /* WeekViewController.swift in Sources */,
 				DA66EA9E1C9B21FE00FFDDBC /* ViewController.swift in Sources */,
 				DA66EA9C1C9B21FE00FFDDBC /* AppDelegate.swift in Sources */,
+				DA7327321C9E1053007AA864 /* AppointmentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

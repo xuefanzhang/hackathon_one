@@ -8,19 +8,42 @@
 
 import UIKit
 
+enum TabBarItem: Int {
+    case GetCare    = 0
+    case Globe      = 1
+    case Chart      = 2
+}
+
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
         let viewController = ViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = navigationController
+        let globeIcon = UIImage(named: "tabbar-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let globeItem: UITabBarItem = UITabBarItem.init(title: "", image: globeIcon, tag: 1)
+        globeItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
+        navigationController.tabBarItem = globeItem
+        let viewControllers = [navigationController]
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.shadowImage = UIImage()
+        
+        
+//        let getCareItem: UITabBarItem = UITabBarItem.init(title: "getCareButton", image: UIImage(named: "tabbar-GetCare"), tag: 0)
+//        let chartItem: UITabBarItem = UITabBarItem.init(title: "chartButton", image: UIImage(named: "tabbar-user"), tag: 2)
+        
+        tabBarController.viewControllers = viewControllers
+        tabBarController.tabBar.backgroundImage = UIImage(named: "img-tabbar")
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true

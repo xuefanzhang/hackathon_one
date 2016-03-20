@@ -48,7 +48,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     let globeImageView = UIImageView()
     let chartImageView = UIImageView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,13 +97,14 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         appointmentsTableView.frame = CGRectMake(15, 60, 340, 200);
         appointmentsTableView.delegate = self
         appointmentsTableView.dataSource = self
-        appointmentsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         appointmentsTableView.backgroundColor = UIColor.clearColor()
         appointmentsTableView.backgroundView = nil
         appointmentsTableView.separatorStyle = .None
         appointmentsTableView.rowHeight = 60
         appointmentsTableView.allowsSelection = false
+        
+        appointmentsTableView.registerClass(AppointmentTableViewCell.self, forCellReuseIdentifier: AppointmentTableViewCell.cellIdentifier())
         
         view.addSubview(appointmentsTableView)
 
@@ -118,29 +118,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         babySizeLabel.lineBreakMode = .ByWordWrapping
         babySizeLabel.frame = CGRectMake(15, 390, view.bounds.width - 30, 80)
         view.addSubview(babySizeLabel)
-        
-        let tabBarImage = UIImage(named: "img-tabbar")!
-        tabBarImageView.image = tabBarImage
-        tabBarImageView.frame = CGRectMake(view.frame.origin.x, view.bounds.height - 200, view.bounds.width, 80)
-        view.addSubview(tabBarImageView)
-        
-        getCareImageView.image = UIImage(named: "tabbar-GetCare")!
-        getCareImageView.sizeToFit()
-        getCareImageView.frame = CGRectMake(170, view.bounds.height - 180, CGRectGetWidth(getCareImageView.bounds), CGRectGetHeight(getCareImageView.bounds))
-        view.addSubview(getCareImageView)
-        
-        globeImageView.image = UIImage(named: "tabbar-feed")!
-        globeImageView.sizeToFit()
-        globeImageView.frame = CGRectMake(20, view.bounds.height - 160, CGRectGetWidth(globeImageView.bounds), CGRectGetHeight(globeImageView.bounds))
-        view.addSubview(globeImageView)
-        
-        chartImageView.image = UIImage(named: "tabbar-user")!
-        chartImageView.sizeToFit()
-        chartImageView.frame = CGRectMake(335, view.bounds.height - 160, CGRectGetWidth(chartImageView.bounds), CGRectGetHeight(chartImageView.bounds))
-        view.addSubview(chartImageView)
-        
-        
- 
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,48 +145,23 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell!
+        let reuseIdentifier = AppointmentTableViewCell.cellIdentifier()
+        
+        let cell:AppointmentTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! AppointmentTableViewCell
         
         let appointment = self.appointments[indexPath.section]
+        
+        cell.monthLabel.text    = appointment.month
+        cell.dateLabel.text     = appointment.date
+        cell.titleLabel.text    = appointment.title
+        cell.locationLabel.text = appointment.location
+        
+        
         
         cell.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
         cell.layer.cornerRadius = 5
         cell.layer.borderColor = UIColor.whiteColor().colorWithAlphaComponent(0.3).CGColor
         cell.layer.borderWidth = 1
-        
-        let month = UILabel()
-        month.text = appointment.month
-        month.font = UIFont(name: "Lato-Light", size: 15)
-        month.textColor = UIColor.whiteColor()
-        month.sizeToFit()
-        
-        let date = UILabel()
-        date.text = appointment.date
-        date.font = UIFont(name: "MuseoSlab-500", size: 22)
-        date.textColor = UIColor.whiteColor()
-        date.sizeToFit()
-        
-        let title = UILabel()
-        title.text = appointment.title
-        title.font = UIFont(name: "MuseoSlab-500", size: 15)
-        title.textColor = UIColor.whiteColor()
-        title.sizeToFit()
-        
-        let location = UILabel()
-        location.text = appointment.location
-        location.font = UIFont(name: "Lato-Light", size: 15)
-        location.textColor = UIColor.whiteColor()
-        location.sizeToFit()
-        
-        month.frame = CGRectMake(cell.frame.origin.x + 10, cell.frame.origin.y + 10, CGRectGetWidth(month.bounds), CGRectGetHeight(month.bounds))
-        date.frame = CGRectMake(cell.frame.origin.x + 10, cell.frame.origin.y + 30, CGRectGetWidth(date.bounds), CGRectGetHeight(date.bounds))
-        title.frame = CGRectMake(cell.frame.origin.x + 60, cell.frame.origin.y + 10, CGRectGetWidth(title.bounds), CGRectGetHeight(title.bounds))
-        location.frame = CGRectMake(cell.frame.origin.x + 60, cell.frame.origin.y + 35, CGRectGetWidth(location.bounds), CGRectGetHeight(location.bounds))
-        
-        cell.addSubview(month)
-        cell.addSubview(date)
-        cell.addSubview(title)
-        cell.addSubview(location)
 
         return cell
         
