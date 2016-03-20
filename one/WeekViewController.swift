@@ -25,15 +25,16 @@ struct AppointmentObject {
 class WeekViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     let topScrollView = UIScrollView()
-    var previousTopOffset = CGFloat()
     let bottomScrollView = UIScrollView()
     let bottomImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "wk12")!)
         imageView.sizeToFit()
         return imageView
     }()
-    var previousBottomOffset = CGFloat()
-    
+
+    var originalTopOffset = CGFloat()
+    var originalBottomOffset = CGFloat()
+    var contentSizeRatio = CGFloat()
     
     let trimesterLabel = UILabel()
     let weekLabel = UILabel()
@@ -62,20 +63,14 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        previousTopOffset = 0
+        originalTopOffset = 0
         topScrollView.backgroundColor = UIColor(patternImage: UIImage(named: "img-bgDefault")!)
         topScrollView.tag = 100
         topScrollView.delegate = self;
-        topScrollView.frame = CGRectMake(0, 0, view.bounds.width, view.bounds.height)
+        topScrollView.frame = view.bounds
+        topScrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        topScrollView.setContentOffset(CGPointMake(0, -100), animated: false)
         topScrollView.userInteractionEnabled = false
-        
-        previousBottomOffset = view.bounds.size.height
-        bottomScrollView.tag = 101
-        bottomScrollView.delegate = self;
-        bottomScrollView.frame = CGRectMake(0, 0, view.bounds.width, view.bounds.height)
-        bottomScrollView.contentSize = bottomImageView.bounds.size
-        bottomScrollView.addSubview(bottomImageView)
-        bottomScrollView.setContentOffset(CGPointMake(0, previousBottomOffset), animated: false)
         
         trimesterLabel.textColor = UIColor.whiteColor()
         trimesterLabel.font = UIFont(name: "MuseoSlab-500", size: 15)
@@ -132,7 +127,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         appointmentsTableView.registerClass(AppointmentTableViewCell.self, forCellReuseIdentifier: AppointmentTableViewCell.cellIdentifier())
         
         topScrollView.addSubview(appointmentsTableView)
-        
 
         babySizeImageView.image = UIImage(named: "img-wk12LimeFetus")!
         babySizeImageView.frame = CGRectMake(15, 280, 87, 96)
@@ -146,33 +140,31 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         topScrollView.addSubview(babySizeLabel)
         
         topScrollView.contentSize = CGSizeMake(view.bounds.width, CGRectGetMaxY(babySizeLabel.frame))
+
+        originalBottomOffset = view.bounds.height
+        bottomScrollView.tag = 101
+        bottomScrollView.delegate = self;
+        bottomScrollView.frame = view.bounds
+        bottomScrollView.contentSize = bottomImageView.bounds.size
+        bottomScrollView.addSubview(bottomImageView)
+        bottomScrollView.showsVerticalScrollIndicator = false
+        bottomScrollView.showsHorizontalScrollIndicator = false
+        // 120 is the height of all the content we want to be able to scroll above (navigation bars, tab bar, etc.)
+        bottomScrollView.contentInset = UIEdgeInsetsMake(originalBottomOffset, 0, 120, 0);
+        bottomScrollView.contentOffset = CGPointMake(0, -originalBottomOffset)
+
+        contentSizeRatio = topScrollView.contentSize.height / bottomScrollView.contentSize.height
         
         view.addSubview(topScrollView)
         view.addSubview(bottomScrollView)
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        print("Bottom scroll view offset: \(bottomScrollView.contentOffset)")
-        print("Image view frame: \(bottomImageView.frame)")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("Bottom scroll view offset: \(bottomScrollView.contentOffset)")
-        print("Image view frame: \(bottomImageView.frame)")
-//        if (scrollView.tag == 101) {  //bottom scroll view
-//            let diff = scrollView.contentOffset.y - previousBottomOffset
-//            print("previousTopOffset: \(previousTopOffset)")
-//            topScrollView.setContentOffset(CGPointMake(0, previousTopOffset - diff), animated: true)
-//            previousBottomOffset = scrollView.contentOffset.y
-//            previousTopOffset = topScrollView.contentOffset.y
-//        }
+        if (scrollView == bottomScrollView) {
+            let diff = -originalBottomOffset - scrollView.contentOffset.y
+            let topScrollDelta = diff * contentSizeRatio
+            topScrollView.setContentOffset(CGPointMake(0, originalTopOffset - topScrollDelta), animated: false)
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -214,9 +206,4 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
         
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print ("You selected cell #\(indexPath.row)!")
-    }
-
 }
