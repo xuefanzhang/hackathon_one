@@ -69,6 +69,7 @@ public class MenuView: UIScrollView {
         UIView.animateWithDuration(duration, animations: { [weak self] () -> Void in
             guard let _ = self else { return }
             
+            self!.colorMenuItem()
             self!.focusMenuItem()
             self!.positionMenuItemViews()
         }) { [weak self] (_) in
@@ -293,6 +294,15 @@ public class MenuView: UIScrollView {
         
         let ratio = CGFloat(currentPage) / CGFloat(menuItemViews.count - 1)
         return (contentSize.width - frame.width) * ratio
+    }
+    
+    private func colorMenuItem() {
+        let colors = self.options.circleBackgroundColors
+        let textColors = self.options.textColors
+        menuItemViews.forEach {
+            $0.setupBackgroundCircleView(colors[menuItemViews.indexOf($0)!])
+            $0.setupLabel(title: nil, color: textColors[menuItemViews.indexOf($0)!])
+        }
     }
     
     private func focusMenuItem() {

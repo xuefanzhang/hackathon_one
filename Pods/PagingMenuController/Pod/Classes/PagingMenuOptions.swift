@@ -13,7 +13,8 @@ public class PagingMenuOptions {
     public var scrollEnabled = true // in case of using swipable cells, set false
     public var backgroundColor = UIColor.whiteColor()
     public var selectedBackgroundColor = UIColor.whiteColor()
-    public var textColor = UIColor.lightGrayColor()
+    public var circleBackgroundColors = [UIColor.whiteColor()]
+    public var textColors = [UIColor.lightGrayColor()]
     public var selectedTextColor = UIColor.blackColor()
     public var font = UIFont.systemFontOfSize(16)
     public var selectedFont = UIFont.systemFontOfSize(16)
