@@ -1,2 +1,4 @@
 .DS_Store
 one.xcworkspace/xcuserdata/
+one.xcodeproj/xcuserdata/*.xcuserdatad/
+Pods/Pods.xcodeproj/xcuserdata/*.xcuserdatad/
