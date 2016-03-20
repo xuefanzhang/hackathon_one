@@ -17,20 +17,15 @@ public class MenuItemView: UIView {
         label.userInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        /*
-        label.backgroundColor = UIColor.greenColor()
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 40
-        label.layer.borderColor = UIColor.greenColor().CGColor
-        label.layer.borderWidth = 1
-        */
-        
         return label
     }()
     
     public let backgroundCircleView: UIView = {
         let roundRectView = UIView()
-        roundRectView.backgroundColor = UIColor.blueColor()
+        roundRectView.opaque = true;
+        roundRectView.translatesAutoresizingMaskIntoConstraints = false
+        roundRectView.layer.masksToBounds = true
+        roundRectView.layer.cornerRadius = 20 // this should not be hard-coded, but 'hack'athon ;)
         
         return roundRectView
     }()
@@ -46,6 +41,8 @@ public class MenuItemView: UIView {
         self.options = options
         
         setupView()
+        setupBackgroundCircleView()
+        layoutBackgroundCircleView()
         setupLabel(title: title)
         layoutLabel()
     }
@@ -57,24 +54,12 @@ public class MenuItemView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
-    override public func drawRect(rect: CGRect) {
-        let radius = CGRectGetHeight(self.layer.bounds) - 20
-        let backgroundCircle = CAShapeLayer()
-        backgroundCircle.frame = CGRectInset(self.layer.frame, 10, 10)
-        backgroundCircle.cornerRadius = radius / 2
-        backgroundCircle.backgroundColor = UIColor.blueColor().CGColor
-        self.layer.addSublayer(backgroundCircle)
-        
-//        self.layer.frame = CGRectInset(self.frame, 10, 10)
-//        self.layer.cornerRadius = (rect.size.height - 20) / 2
-//        self.layer.backgroundColor = UIColor.blueColor().CGColor
-    }
-    
+
     // MARK: - Cleanup
     
     internal func cleanup() {
         titleLabel.removeFromSuperview()
+        backgroundCircleView.removeFromSuperview()
     }
     
     // MARK: - Constraints manager
@@ -120,6 +105,12 @@ public class MenuItemView: UIView {
         titleLabel.font = options.font
         addSubview(titleLabel)
     }
+
+    private func setupBackgroundCircleView() {
+        // TODO:(Michael) make a custom color in the options
+        backgroundCircleView.backgroundColor = UIColor.blueColor()
+        addSubview(backgroundCircleView)
+    }
     
     private func layoutLabel() {
         let viewsDictionary = ["label": titleLabel]
@@ -133,6 +124,14 @@ public class MenuItemView: UIView {
         
         widthLabelConstraint = NSLayoutConstraint(item: titleLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: labelSize.width)
         widthLabelConstraint.active = true
+    }
+
+    private func layoutBackgroundCircleView() {
+        let viewsDictionary = ["circleView": backgroundCircleView]
+
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[circleView]-10-|", options: [], metrics: nil, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[circleView]-10-|", options: [], metrics: nil, views: viewsDictionary)
+        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
     }
     
     // MARK: - Size calculator

@@ -55,7 +55,6 @@ class ViewController: UIViewController {
         pagingMenuController!.view.frame.size.height -= 64
         
         addChildViewController(pagingMenuController!)
-//        view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png"))
         view.addSubview(pagingMenuController!.view)
         pagingMenuController!.didMoveToParentViewController(self)
     }

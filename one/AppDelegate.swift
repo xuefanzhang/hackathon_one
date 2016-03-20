@@ -8,19 +8,11 @@
 
 import UIKit
 
-enum TabBarItem: Int {
-    case GetCare    = 0
-    case Globe      = 1
-    case Chart      = 2
-}
-
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
