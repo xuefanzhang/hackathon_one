@@ -69,10 +69,7 @@ class ViewController: UIViewController {
         options.menuDisplayMode = .Standard(widthMode: .Fixed(width: 320/8), centerItem: true, scrollingMode: PagingMenuOptions.MenuScrollingMode.ScrollEnabledAndBouces)
 
         pagingMenuController = PagingMenuController(viewControllers: viewControllers, options: options)
-        
-        pagingMenuController!.view.frame.origin.y += 64
-        pagingMenuController!.view.frame.size.height -= 64
-        
+
         addChildViewController(pagingMenuController!)
         view.addSubview(pagingMenuController!.view)
         pagingMenuController!.didMoveToParentViewController(self)
