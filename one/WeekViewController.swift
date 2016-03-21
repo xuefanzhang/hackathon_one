@@ -153,6 +153,15 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         bottomScrollView.contentInset = UIEdgeInsetsMake(originalBottomOffset, 0, 120, 0);
         bottomScrollView.contentOffset = CGPointMake(0, -originalBottomOffset)
 
+        //TODO -- move back to scrollDidScroll:
+//        let radius = view.bounds.width / 4
+//        let path = UIBezierPath(roundedRect:bottomImageView.bounds, byRoundingCorners:[.TopLeft, .TopRight], cornerRadii: CGSizeMake(radius, radius))
+//        UIBezierPath(arcCenter: CGPointMake(view.bounds.width/2, 0), radius: radius, startAngle: <#T##CGFloat#>, endAngle: <#T##CGFloat#>, clockwise: <#T##Bool#>)
+//        let maskLayer = CAShapeLayer()
+//        maskLayer.backgroundColor = UIColor.redColor().CGColor
+//        maskLayer.path = path.CGPath
+//        bottomImageView.layer.mask = maskLayer
+
         contentSizeRatio = topScrollView.contentSize.height / bottomScrollView.contentSize.height
         
         view.addSubview(topScrollView)
@@ -165,6 +174,15 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
             let topScrollDelta = diff * contentSizeRatio
             topScrollView.setContentOffset(CGPointMake(0, originalTopOffset - topScrollDelta), animated: false)
         }
+
+        //TODO: apply here as it scrolls closer to top. You should know it's closer to the top based on its proximity
+        // to the originalTopOffset
+//        let radius = view.bounds.width / 4
+//        let path = UIBezierPath(roundedRect:bottomImageView.bounds, byRoundingCorners:[.TopLeft, .TopRight], cornerRadii: CGSizeMake(radius, radius))
+//        let maskLayer = CAShapeLayer()
+//        maskLayer.backgroundColor = UIColor.redColor().CGColor
+//        maskLayer.path = path.CGPath
+//        bottomImageView.layer.mask = maskLayer
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
