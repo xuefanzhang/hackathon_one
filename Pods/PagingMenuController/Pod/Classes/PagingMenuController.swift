@@ -284,6 +284,8 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         
         menuView.setNeedsLayout()
         menuView.layoutIfNeeded()
+
+        menuView.contentSize = CGSizeMake(menuView.contentSize.width, 1)
     }
     
     private func setupContentScrollView() {
