@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let backgroundColor = UIColor(red: 121/255, green: 120/255, blue: 123/255, alpha: 1)
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -30,8 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let chartIcon = UIImage(named: "tabbar-user")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let chartItem = UITabBarItem.init(title: "", image: chartIcon, tag: 2)
         chartItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
-        
-        let navigationController = UINavigationController(rootViewController: ViewController())
+
+        let globeViewController = ViewController()
+        globeViewController.title = "Week"
+        let navigationController = UINavigationController(rootViewController: globeViewController)
+        navigationController.navigationBar.barTintColor = backgroundColor
+        navigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.translucent = false
+        let titleFont = UIFont(name: "MuseoSlab-500", size: 15)
+        let titleTextColor = UIColor(red: 56/255, green: 56/255, blue: 56/255, alpha: 1)
+        navigationController.navigationBar.titleTextAttributes = [NSFontAttributeName: titleFont!,
+            NSForegroundColorAttributeName: titleTextColor]
         navigationController.tabBarItem = globeItem
         let getCareController = UIViewController()
         getCareController.tabBarItem = getCareItem
@@ -45,6 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.viewControllers = viewControllers
         tabBarController.tabBar.backgroundImage = UIImage(named: "img-tabbar")
         window?.rootViewController = tabBarController
+
+        window?.backgroundColor = backgroundColor
         window?.makeKeyAndVisible()
         
         return true
