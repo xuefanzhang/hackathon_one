@@ -45,10 +45,10 @@ class ViewController: UIViewController {
                 }
             } else if 15...27 ~= i {
                 trimesterNumber = 2
-                circleColors[i-1] = UIColor(red: 235/255, green: 193/255, blue: 83/255, alpha: 1)
+                circleColors[i-1] = UIColor(red: 235/255, green: 193/255, blue: 83/255, alpha: 0.7)
             } else {
                 trimesterNumber = 3
-                circleColors[i-1] = UIColor(red: 237/255, green: 133/255, blue: 73/255, alpha: 1)
+                circleColors[i-1] = UIColor(red: 237/255, green: 133/255, blue: 73/255, alpha: 0.7)
             }
             weekViewController.trimesterLabel.text = "TRIMESTER \(trimesterNumber)"
             weekViewController.dayLabel.text = "DAY 5"
