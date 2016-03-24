@@ -26,11 +26,12 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let topScrollView = UIScrollView()
     let bottomScrollView = UIScrollView()
-    let bottomImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "wk12")!)
-        imageView.sizeToFit()
-        return imageView
-    }()
+//    let bottomImageView: UIImageView = {
+//        let imageView = UIImageView(image: UIImage(named: "wk12")!)
+//        imageView.sizeToFit()
+//        return imageView
+//    }()
+    var bottomImageView = UIImageView()
 
     var originalTopOffset = CGFloat()
     var originalBottomOffset = CGFloat()
@@ -128,7 +129,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         topScrollView.addSubview(appointmentsTableView)
 
-        babySizeImageView.image = UIImage(named: "img-wk12LimeFetus")!
         babySizeImageView.frame = CGRectMake(15, 280, 87, 96)
         topScrollView.addSubview(babySizeImageView)
         

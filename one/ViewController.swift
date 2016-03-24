@@ -50,11 +50,47 @@ class ViewController: UIViewController {
                 trimesterNumber = 3
                 circleColors[i-1] = UIColor(red: 237/255, green: 133/255, blue: 73/255, alpha: 0.7)
             }
+            
             weekViewController.trimesterLabel.text = "TRIMESTER \(trimesterNumber)"
             weekViewController.dayLabel.text = "DAY 5"
-            weekViewController.babySizeLabel.text = "At 2 inches, .5 ounces, your baby is about the size of a lime!"
             
             weekViewController.title = "\(i)"
+            
+            if i == 12 {
+                weekViewController.babySizeImageView.image = UIImage(named: "img-wk12LimeFetus")!
+                weekViewController.babySizeLabel.text = "At 2 inches, .5 ounces, your baby is about the size of a lime!"
+                weekViewController.appointments = [
+                    AppointmentObject(m: "Feb", d: "25", t: "Nuchal Translucency Ultrasound", l: "UCSF Prenatal Diagnostic Center")
+                ]
+                weekViewController.bottomImageView = UIImageView(image: UIImage(named: "wk12")!)
+                weekViewController.bottomImageView.sizeToFit()
+                
+            } else if i == 6 {
+                weekViewController.babySizeImageView.image = UIImage(named: "img-wk6sweetpeaFetus")!
+                weekViewController.babySizeLabel.text = "At about 1/4 of an inch, your baby is the size of a sweet pea!"
+                weekViewController.appointments = [
+                    AppointmentObject(m: "Dec", d: "13", t: "Appointment because no sushi", l: "loc")
+                ]
+                weekViewController.bottomImageView = UIImageView(image: UIImage(named: "wk6")!)
+                weekViewController.bottomImageView.sizeToFit()
+                weekViewController.bottomScrollView
+            } else if i == 25 {
+                weekViewController.babySizeImageView.image = UIImage(named: "img-wk25rutabagaFetus")!
+                weekViewController.babySizeLabel.text = "At 13.5 inches, 1.5 lbs., your baby's weight is similar to a rutabaga!"
+                weekViewController.appointments = [
+                    AppointmentObject(m: "May", d: "27", t: "Screening: Anemia and gestational...", l: "One Medical Phlebotomy")
+                ]
+                weekViewController.bottomImageView = UIImageView(image: UIImage(named: "wk25")!)
+                weekViewController.bottomImageView.sizeToFit()
+            } else if i == 34 {
+                weekViewController.babySizeImageView.image = UIImage(named: "img-wk25cantaloupeFetus")!
+                weekViewController.babySizeLabel.text = "At 20 inches, 5 lbs., your baby is about the size of a cantaloupe!"
+                weekViewController.appointments = [
+                    AppointmentObject(m: "JUL", d: "20", t: "Prenatal Visit.", l: "One Medical - Laurel Heights")
+                ]
+                weekViewController.bottomImageView = UIImageView(image: UIImage(named: "wk34")!)
+                weekViewController.bottomImageView.sizeToFit()
+            }
             viewControllers.append(weekViewController)
         }
         

@@ -55,10 +55,11 @@ class AppointmentTableViewCell: UITableViewCell {
         let appointmentCellTopMargin: CGFloat = 10
         let centerMargin: CGFloat = 20
         let maxDateLabelWidth = fmax(CGRectGetWidth(monthLabel.bounds), CGRectGetWidth(dateLabel.bounds))
+        let maxTitleLocationLabelWidth = fmax(CGRectGetWidth(locationLabel.bounds), CGRectGetWidth(titleLabel.bounds))
         
         monthLabel.frame = CGRectMake(appointmentCellLeftMargin, appointmentCellTopMargin, maxDateLabelWidth, monthLabel.bounds.height)
         dateLabel.frame = CGRectOffset(monthLabel.frame, 0, monthLabel.bounds.height)
-        titleLabel.frame = CGRectMake(CGRectGetMaxX(monthLabel.frame) + centerMargin, appointmentCellTopMargin, titleLabel.bounds.width, titleLabel.bounds.height)
+        titleLabel.frame = CGRectMake(CGRectGetMaxX(monthLabel.frame) + centerMargin, appointmentCellTopMargin, maxTitleLocationLabelWidth, titleLabel.bounds.height)
         locationLabel.frame = CGRectOffset(titleLabel.frame, 0, titleLabel.bounds.height)
     }
 

@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let globeIcon = UIImage(named: "tabbar-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let globeItem: UITabBarItem = UITabBarItem.init(title: "", image: globeIcon, tag: 0)
-        globeItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
+        let feedIcon = UIImage(named: "tabbar-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let feedItem: UITabBarItem = UITabBarItem.init(title: "", image: feedIcon, tag: 0)
+        feedItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
         
         let getCareIcon = UIImage(named: "tabbar-GetCare")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let getCareItem = UITabBarItem.init(title: "", image: getCareIcon, tag: 1)
@@ -44,8 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let titleTextColor = UIColor(red: 56/255, green: 56/255, blue: 56/255, alpha: 1)
         navigationController.navigationBar.titleTextAttributes = [NSFontAttributeName: titleFont!,
             NSForegroundColorAttributeName: titleTextColor]
-        navigationController.tabBarItem = globeItem
+        navigationController.tabBarItem = feedItem
         let getCareController = UIViewController()
+        getCareController.view.backgroundColor = UIColor(patternImage: UIImage(named: "videovisits")!)
+        
         getCareController.tabBarItem = getCareItem
         let userController = UIViewController()
         userController.tabBarItem = chartItem
