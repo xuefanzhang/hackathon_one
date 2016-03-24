@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.navigationBar.translucent = false
         let titleFont = UIFont(name: "MuseoSlab-500", size: 15)
-        let titleTextColor = UIColor(red: 56/255, green: 56/255, blue: 56/255, alpha: 1)
+        let titleTextColor = UIColor(red: 52/255, green: 52/255, blue: 52/255, alpha: 1)
         navigationController.navigationBar.titleTextAttributes = [NSFontAttributeName: titleFont!,
             NSForegroundColorAttributeName: titleTextColor]
         navigationController.tabBarItem = feedItem
