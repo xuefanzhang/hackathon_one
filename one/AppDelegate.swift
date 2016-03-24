@@ -22,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let feedIcon = UIImage(named: "tabbar-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let feedItem: UITabBarItem = UITabBarItem.init(title: "", image: feedIcon, tag: 0)
+        let feedIconSelected = UIImage(named: "tabbarSelected-feed")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let feedItem: UITabBarItem = UITabBarItem.init(title: "", image: feedIcon, selectedImage: feedIconSelected)
         feedItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
         
         let getCareIcon = UIImage(named: "tabbar-GetCare")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let getCareItem = UITabBarItem.init(title: "", image: getCareIcon, tag: 1)
+        let getCareIconSelected = UIImage(named: "tabbarSelected-GetCare")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let getCareItem: UITabBarItem = UITabBarItem.init(title: "", image: getCareIcon, selectedImage: getCareIconSelected)
         getCareItem.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0)
         
         let chartIcon = UIImage(named: "tabbar-user")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)

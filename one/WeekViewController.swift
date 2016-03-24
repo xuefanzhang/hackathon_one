@@ -26,11 +26,6 @@ class WeekViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let topScrollView = UIScrollView()
     let bottomScrollView = UIScrollView()
-//    let bottomImageView: UIImageView = {
-//        let imageView = UIImageView(image: UIImage(named: "wk12")!)
-//        imageView.sizeToFit()
-//        return imageView
-//    }()
     var bottomImageView = UIImageView()
 
     var originalTopOffset = CGFloat()
